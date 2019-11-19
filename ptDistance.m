@@ -1,11 +1,11 @@
 function output = ptDistance(input,pt)
-% [FUNCTION] Pré-traitemnt pour calcule de la distance particulière
+% [FUNCTION] Pre process data with the selected transformation
 % output = ptDistance(input,pt)
-%  input : donnée d'entrée
+%  input : input data
 %        matrix ou struct
-%     pt : option en texte
+%     pt : otpion
 %        'motif-local', 'distribution', 'fluctuation-jour', etc.
-% output : données en sortie
+% output : output data
 %        matrix ou struct
 
 switch(pt)
@@ -25,7 +25,7 @@ switch(pt)
             end
         else
             %Log
-            error(['(!) PRE-TRAITEMENT: ''',inputname(1),''' n''est pas une structure, il  faut définir ''',inputname(1),'.data'' ainsi ''',inputname(1),'.masks''.']);
+            error(['(!) PRE-TRAITEMENT: ''',inputname(1),''' n''est pas une structure, il  faut dÃ©finir ''',inputname(1),'.data'' ainsi ''',inputname(1),'.masks''.']);
         end
         %Nettoyage
         clear m obs comp i j;
@@ -36,7 +36,7 @@ switch(pt)
             output = hist(input.data(:),input.edges);
         else
             %Log
-            error(['(!) PRE-TRAITEMENT: ''',inputname(1),''' n''est pas une structure, il  faut définir ''',inputname(1),'.data'' ainsi ''',inputname(1),'.edges''.']);
+            error(['(!) PRE-TRAITEMENT: ''',inputname(1),''' n''est pas une structure, il  faut dÃ©finir ''',inputname(1),'.data'' ainsi ''',inputname(1),'.edges''.']);
         end
     case 'motif-local'
         %Traitement
