@@ -38,8 +38,8 @@ if ismatrix(j1) && ismatrix(j2)
     end
     clear output eff obs comp;
 
-    edges = load('save_work_09_01_2019_1.mat', 'edges');
-    edges = edges.edges;
+    load('edges.mat');
+    
     s = 0;
     for i=1:m
         j1 = histcounts(input.cube(i).data(1,:),edges,'Normalization','probability');
@@ -56,6 +56,6 @@ elseif ndims(j1)== 3 && ndims(j2)== 3
     
     dist = s / m;
 else
-    error('(!)dePrecipTRMM : Problème de dimension.. ');
+    error('(!)dePrecipTRMM : ProblÃ¨me de dimension.. ');
 end
 end
