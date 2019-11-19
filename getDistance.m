@@ -1,13 +1,13 @@
 function output = getDistance(input1,input2,type)
-% [FUNCTION] Pré-traitemnt pour calcule de la distance particulière
-% output = ptDistance(input,pt)
-%  input1 : donnée d'entrée
+% [FUNCTION] Get the selected distance between two input data
+% output = getDistance(input1,input2,type)
+%  input1 : input data
 %        matrix
-%  input2 : donnée d'entrée
+%  input2 : input data
 %        matrix
-%   type : option en texte
+%   type : text
 %        'motif-local', 'distribution', 'fluctuation-jour', etc.
-% output : données en sortie
+% output : output data
 %        matrix
 
 switch type
@@ -95,8 +95,7 @@ switch type
         J1 = input2(1,1);
         J2 = input2(1,2);
         n = length(input.cube);
-        edges = load('save_work_09_01_2019_1.mat', 'edges');
-        edges = edges.edges;
+        load('edges.mat');
         s = 0;
         for i=1:n
             j1 = histcounts(input.cube(i).data(J1,:),edges,'Normalization','probability');
@@ -106,7 +105,7 @@ switch type
         output = s / n;
     otherwise
         %Log
-        error(['/!\ GET-DISTANCE: ''',type,''' est inconu..']);
+        error(['/!\ GET-DISTANCE: ''',type,''' is unknown..']);
 end
 
 %Log
