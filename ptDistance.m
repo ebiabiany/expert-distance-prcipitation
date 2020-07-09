@@ -1,8 +1,8 @@
 function output = ptDistance(input,pt)
 
-switch(pt)
+switch (pt)
     case 'decoupage'
-        if isstruct(input)
+        if (isstruct(input))
             [m,~] = size(input.masks);
             [obs,comp] = size(input.data);
             output = ones(obs,comp,m)*NaN;
@@ -19,7 +19,7 @@ switch(pt)
         endif
         clear m obs comp i j;
     case 'distribution'
-        if isstruct(input)
+        if (isstruct(input))
             output = hist(input.data(:),input.edges);
         else
             %Log
