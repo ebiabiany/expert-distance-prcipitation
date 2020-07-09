@@ -1,6 +1,6 @@
 function output = getDistance(input1,input2,type)
 
-switch type
+switch (type)
     case 'l1'
         output = norm(input2-input1,1);
     case 'l2'
@@ -16,10 +16,10 @@ switch type
     case 'spearman'
         output = pdist([input1;input2],'spearman');
     case 'kullback'
-        if size(input1,2)~=size(input2,2)
+        if (size(input1,2)~=size(input2,2))
             error('the number of columns in input1 and input2 should be the same');
         endif
-        if sum(~isfinite(input1(:))) + sum(~isfinite(input2(:)))
+        if (sum(~isfinite(input1(:))) + sum(~isfinite(input2(:))))
            error('the inputs contain non-finite values!') 
         endif
         if size(input2,1)==1
@@ -28,7 +28,7 @@ switch type
             temp =  input1.*log2(input1./repmat(input2,[size(input1,1) 1]));
             temp(isnan(temp))=0;
             X = sum(temp,2);
-        elseif size(input2,1)==size(input1,1)
+        elseif (size(input2,1)==size(input1,1))
             input2 = input2 ./repmat(sum(input2,2),[1 size(input2,2)]);
             input1 = input1 ./repmat(sum(input1,2),[1 size(input1,2)]);
             temp =  input1.*log2(input1./input2);
@@ -38,19 +38,19 @@ switch type
         C = input1;
         input1 = input2;
         input2 = C;
-        if size(input1,2)~=size(input2,2)
+        if (size(input1,2)~=size(input2,2))
             error('the number of columns in input1 and input2 should be the same');
         endif
-        if sum(~isfinite(input1(:))) + sum(~isfinite(input2(:)))
+        if (sum(~isfinite(input1(:))) + sum(~isfinite(input2(:))))
            error('the inputs contain non-finite values!') 
         endif
-        if size(input2,1)==1
+        if (size(input2,1)==1)
             input2 = input2 ./sum(input2);
             input1 = input1 ./repmat(sum(input1,2),[1 size(input1,2)]);
             temp =  input1.*log2(input1./repmat(input2,[size(input1,1) 1]));
             temp(isnan(temp))=0;
             Y = sum(temp,2);
-        elseif size(input2,1)==size(input1,1)
+        elseif (size(input2,1)==size(input1,1))
             input2 = input2 ./repmat(sum(input2,2),[1 size(input2,2)]);
             input1 = input1 ./repmat(sum(input1,2),[1 size(input1,2)]);
             temp =  input1.*log2(input1./input2);
@@ -80,8 +80,8 @@ switch type
         load('edges.mat');
         s = 0;
         for i=1:n
-            j1 = histcounts(input.cube(i).data(J1,:),edges,'Normalization','probability');
-            j2 = histcounts(input.cube(i).data(J2,:),edges,'Normalization','probability');
+            j1 = histc(input.cube(i).data(J1,:),edges,'Normalization','probability');
+            j2 = histc(input.cube(i).data(J2,:),edges,'Normalization','probability');
             s = s + getDistance(j1,j2,'kl');
         endfor
         output = s / n;
